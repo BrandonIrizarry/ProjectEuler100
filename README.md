@@ -1,5 +1,5 @@
-I've undertaken and committed to the ProjectEuler100 challenge,
-presented by Quincy Larson and FreeCodeCamp.
+I've undertaken and committed to the [ProjectEuler100 challenge](https://www.freecodecamp.org/news/projecteuler100-coding-challenge-competitive-programming/),
+presented by Quincy Larson and [FreeCodeCamp](https://www.freecodecamp.org/).
 
 This repository hosts my solutions to each problem in a separate directory,
 which contains a solution in at least one language. I was initially inspired
