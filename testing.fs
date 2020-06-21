@@ -10,13 +10,12 @@
 \ right afterwards. If n doesn't match k, an error is raised.
 
 : expectdepth ( n --)
-	depth 1- <> if
-		abort" stack depth doesn't check out"
-	then ; 
+	depth 1- <>
+		abort" stack depth doesn't check out" ;
 
 : answer-is ( n ans --)
-	over <> if abort" answer doesn't match expected answer"
-	then ;
+	over <>
+		abort" answer doesn't match expected answer" ;
 
 
 \ Some thoughts on why we use the word ANSWER-IS:
