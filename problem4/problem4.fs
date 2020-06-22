@@ -1,4 +1,5 @@
 s" ../testing.fs" included
+s" ../divisor.fs" included
 
 \ Problem 4
 \ 
@@ -6,28 +7,24 @@ s" ../testing.fs" included
 \ the product of two 2-digit numbers is 9009 = 91 × 99. Find the largest 
 \ palindrome made from the product of two 3-digit numbers.
 
-\ TODO
-\ I think we need to count digits! Makes reversing easier regardless
-\ of how our new improvements changed things.
-
-: 10** ( n -- n)	\ reverse logarithm-base-10
+: 10** ( n -- n)	\ compute 10 raised to the nth power
 	1 swap 0 ?do 10 * loop ;
 
-\ : reverse ( n --n)	\ reverses the last three digits of its input
-\ 	0 swap 0 2 do
-\ 		10 /mod -rot i 10** * + swap
-\ 	-1 +loop drop ;
+: #digits ( n -- n)		\ compute number of digits of n
+	0 swap begin
+		10 / swap 1+ swap ?dup
+	0= until ;
 
-: reverse ( n #digits-1 --n)	\ reverses the last #digits digits of its input
-	0 -rot 0 swap do
-		10 /mod -rot i 10** * + swap
+: shift ( n places --n)		\ left-shift n by places, but in base ten
+	10** * ;
+
+: reverse ( n --n)		\ computes the reverse of a number
+	0 swap 2dup #digits 1- do
+		10 /mod -rot i shift + swap
 	-1 +loop drop ;
 
-978 2 reverse 1 expectdepth .
-10 1 reverse 1 expectdepth .
-
-\ : build ( n --n)		\ build a candidate palindrome-product
-\ 	dup reverse swap 1000 * + ;
+: palindromify ( n -- n) 	\ build a palindrome from n and its reverse
+	dup reverse swap dup #digits shift + ;
 
 
 false [if]
