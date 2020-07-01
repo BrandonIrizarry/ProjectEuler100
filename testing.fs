@@ -5,6 +5,10 @@
 \ that word, then run 'n expectdepth' right afterwards.  If the stack
 \ doesn't have depth n, then EXPECTDEPTH will raise an error.
 \
+\ ALL-CLEAR
+\ Usually we want to print a result; after doing so, the stack should be empty.
+\ This word checks for that.
+\
 \ ANSWER-IS
 \ Run a word. If you expect TOS to equal some value k, run 'k answer-is'
 \ right afterwards. If n doesn't match k, an error is raised.
@@ -12,6 +16,9 @@
 : expectdepth ( n --)
 	depth 1- <>
 		abort" stack depth doesn't check out" ;
+
+: all-clear ( --)
+	0 expectdepth ;
 
 : answer-is ( n ans --)
 	over <>
