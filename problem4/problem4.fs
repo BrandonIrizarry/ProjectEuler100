@@ -23,11 +23,22 @@ s" ../divisor.fs" included
 		10 /mod -rot i shift + swap
 	-1 +loop drop ;
 
+: palindrome ( n --f)
+	dup reverse = ;
+
+: factor
+	1 begin
+		swap /divisor -rot * 
+		2dup . . cr
+		dup #digits
+	6 >= until ;
+
+999999 factor .s
+
+false [if]
 : palindromify ( n -- n) 	\ build a palindrome from n and its reverse
 	dup reverse swap dup #digits shift + ;
 
-
-false [if]
 variable palindrome
 
 : accum+ ( n --)
