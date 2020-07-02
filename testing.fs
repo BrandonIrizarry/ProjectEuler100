@@ -21,8 +21,8 @@
 	0 expectdepth ;
 
 : answer-is ( n ans --)
-	over <>
-		abort" answer doesn't match expected answer" ;
+	<> \ should consume n and ans
+	abort" answer doesn't match expected answer" ;
 
 
 \ Some thoughts on why we use the word ANSWER-IS:
