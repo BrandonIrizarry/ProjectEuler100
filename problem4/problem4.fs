@@ -1,27 +1,27 @@
 s" ../testing.fs" included
 
-\ figure out if input is a palindrome
-\ TODO: find a simpler definition of PALINDROME
-: #digits ( n -- n)		\ compute number of digits of n
-	0 swap begin
-		10 / swap 1+ swap ?dup
-	0= until ;
-
-: 10** ( n --n)
-	1 swap 0 ?do 10 * loop ;
-
-: shift ( n places --n)		\ left-shift n by places, but in base ten
-	10** * ;
-
-: reverse ( n --n)		\ computes the reverse of a number
-	0 swap 2dup #digits 1- do
-		10 /mod -rot i shift + swap
-	-1 +loop drop ;
-
-: palindrome ( n --f)
-	dup reverse = ;
-
-
+\ Glossary
+\
+\ SQRT ( n -- n)
+\ 	- Returns the floor of the square-root of its input.
+\
+\ /EVEN (a b -- quot f)
+\ 	- Return quotient after dividing a by b, and signal whether
+\ 	division was even.
+\
+\ FACTOR ( n -- x y)
+\ 	- Factors n into two numbers x and y, such that x <= [sqrt(n)], and x
+\ 	is the largest such number.
+\
+\ #REVERSE ( n -- n)
+\ 	- Returns the palindrome of n (input and output are signed integers.)
+\
+\ PALINDROME ( n -- f)
+\ 	- Return whether n is a palindrome.
+\
+\ SOLVE ( -- )
+\ 	- Use the above words to determine the largest palindrome that's a product
+\ 	of two three-digit numbers.
 
 
 : sqrt ( n -- floor{sqrt{n}})
@@ -30,16 +30,26 @@ s" ../testing.fs" included
 			i 1- leave
 	then loop nip ;
 
-: /even ( n n -- quot f) \ flag signals even-division
+: /even ( n n -- quot f)
 	/mod swap 0= ;
 	
-\ factors N into two numbers, but the smaller factor is the largest number
-\ x such that x <= floor(sqrt(N))
 : factor ( N -- x y)
 	dup sqrt swap >r 1+ 0 begin
 		drop 1- \ set up arguments for the body of the loop
 		r@ over /even
 	until rdrop ;
+
+
+
+: #reverse ( n--n)
+	0 begin
+		10 *
+		swap 10 /mod
+		-rot +
+	over 0= until nip ;
+
+: palindrome ( n --f)
+	dup #reverse = ;
 
 : solve ( --)
 	10001 999999 do
@@ -55,4 +65,3 @@ solve
 	993 913 *
 		906609 answer-is
 	all-clear
-	
