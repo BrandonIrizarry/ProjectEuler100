@@ -10,3 +10,7 @@
 \ Compute greatest common divisor of two numbers a and b
 : gcd ( a b -- gcd)
 	begin tuck mod ?dup 0= until ;
+
+\ Square a number
+: square ( n -- n)
+	dup * ;
