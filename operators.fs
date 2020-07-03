@@ -6,3 +6,7 @@
 	1 swap 0 ?do
 		over *
 	loop nip ;
+
+\ Compute greatest common divisor of two numbers a and b
+: gcd ( a b -- gcd)
+	begin tuck mod ?dup 0= until ;
