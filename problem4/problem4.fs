@@ -57,7 +57,7 @@ s" ../testing.fs" included
 			i factor
 			dup 1000 < if leave then 2drop
 		then
-	-1 +loop ;
+	-11 +loop ;
 
 solve
 	993 answer-is
