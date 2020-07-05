@@ -1,4 +1,5 @@
 s" ../testing.fs" included
+s" ../operators.fs" included
 
 \ Glossary
 \
@@ -51,17 +52,32 @@ s" ../testing.fs" included
 : palindrome ( n --f)
 	dup #reverse = ;
 
-: solve ( --)
-	10001 999999 do
+: 10-raise ( n -- 10^n)
+	10 swap ** ;
+
+: solve ( k --)		\ instead of 3-digit factors, find k-digit factors
+	dup >r		\ send k to the return stack, we'll need it later as J
+	dup 1- 2* 10-raise
+	swap 2* 10-raise
+	do
 		i palindrome if
 			i factor
-			dup 1000 < if leave then 2drop
+			dup 10 j ** < if leave then 2drop
 		then
-	-1 +loop ;
+	-1 +loop rdrop ;
 
-solve
+false [if]
+3 solve
 	993 answer-is
 	913 answer-is
 	993 913 *
 		906609 answer-is
+	all-clear
+[then]
+
+5 solve
+	99979 answer-is
+	99681 answer-is
+	99681 99979 *
+		9966006699 answer-is
 	all-clear
