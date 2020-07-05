@@ -20,9 +20,12 @@ s" ../operators.fs" included
 \ PALINDROME ( n -- f)
 \ 	- Return whether n is a palindrome.
 \
-\ SOLVE ( -- )
+\ 10-RAISE ( n -- 10^n)
+\ 	- Raise n to the tenth power.
+\
+\ SOLVE ( k --)
 \ 	- Use the above words to determine the largest palindrome that's a product
-\ 	of two three-digit numbers.
+\ 	of two k-digit numbers.
 
 
 : sqrt ( n -- floor{sqrt{n}})
